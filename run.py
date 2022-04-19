@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import abi
+import config
 
 # path to working directory
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -52,6 +53,12 @@ def eatBake():
 
 
 def main():
+    if balance < config.MIN_BALANCE:
+        with open(dir_path + '/log.txt', 'a') as file:
+            file.write(
+                f"{time.strftime(format('%d.%m %H:%M'))} Balance too low \n")
+        sys.exit()
+
     reBake()
 
 
