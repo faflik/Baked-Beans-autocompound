@@ -32,6 +32,9 @@ miners = contract.functions.getMyMiners(address).call()
 
 def reBake():
     nonce = web3.eth.get_transaction_count(address)
+    beanRewards = contract.functions.beanRewards(address).call()
+    beanRewards = web3.fromWei(beanRewards, 'ether')
+    beanRewards = round(beanRewards, 5)
 
     tx = contract.functions.hatchEggs(ref).buildTransaction({
         'nonce': nonce,
@@ -45,7 +48,8 @@ def reBake():
 
     with open(dir_path + '/log.txt', 'a') as file:
         file.write(
-            f"{time.strftime(format('%d.%m %H:%M'))} RE-BAKE {miners}\n")
+            f"{time.strftime(format('%d.%m %H:%M'))} RE-BAKE {miners} rewards: {beanRewards}\n"
+        )
 
 
 def eatBake():
