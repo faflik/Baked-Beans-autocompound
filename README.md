@@ -27,8 +27,8 @@ Buy some VPS or Raspberry Pi to run script 24 hours per day, then follow steps b
    ~~~
    
    ~~~
-   1 */4 * * * python3 /PATH_TO_FILE/beans/reBake.py
-   59 23 * * * python3 /PATH_TO_FILE/beans/eatBeans.py
+   1 */4 * * 1,2,3,4,5,6 python3 /PATH_TO_FILE/beans/reBake.py
+   59 23 * * 7 python3 /PATH_TO_FILE/beans/eatBeans.py
    ~~~
     Edit PATH_TO_FILE. 
      - For root user /root/beans/...
