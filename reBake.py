@@ -30,17 +30,24 @@ contract = web3.eth.contract(address=contract_adres, abi=abi.ABI)
 
 
 def accountInfo():
-    global beanRewards, beans, contractBalance
+    global beanRewards, beans, contractBalance, miners, dailyEgs, dailyPayout
 
     beanRewards = contract.functions.beanRewards(address).call()
     beanRewards = web3.fromWei(beanRewards, 'ether')
-    beanRewards = round(beanRewards, 5)
+    # beanRewards = round(beanRewards, 5)
 
     beans = contract.functions.getMyMiners(address).call()
 
     contractBalance = contract.functions.getBalance().call()
     contractBalance = web3.fromWei(contractBalance, 'ether')
     contractBalance = round(contractBalance, 3)
+
+    # daily rewards
+    miners = contract.functions.getMyMiners(address).call()
+    dailyEgs = 86400
+    dailyBeans = miners * dailyEgs
+    dailyPayout = contract.functions.calculateEggSell(dailyBeans).call()
+    dailyPayout = dailyPayout / 10**18
 
 
 def reBake():
@@ -58,7 +65,7 @@ def reBake():
     with open(dir_path + '/log.txt', 'a') as file:
         timeStamp = time.strftime(format('%d.%m %H:%M'))
         file.write(
-            f"RE-BAKE:   {timeStamp} | Rewards: {beanRewards} | Beans: {beans} | ContracBalance: {contractBalance}\n"
+            f"RE-BAKE:   {timeStamp} | Rewards: {beanRewards} | Beans: {beans} | ContracBalance: {contractBalance} | DailyPayout: {dailyPayout}\n"
         )
 
 
