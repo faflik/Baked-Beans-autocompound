@@ -65,7 +65,19 @@ def eatBeans():
     with open(dir_path + '/log.txt', 'a') as file:
         timeStamp = time.strftime(format('%d.%m %H:%M'))
         file.write(
+            f'-----\n'
             f"EAT-BEANS: {timeStamp} | Rewards: {beanRewards} | Beans: {beans} | ContracBalance: {contractBalance} | DailyPayout: {dailyPayout}\n"
+        )
+        
+    time.sleep(30)
+    accountInfo()
+    
+    with open(dir_path + '/log.txt', 'a') as file:
+        timeStamp = time.strftime(format('%d.%m %H:%M'))
+        file.write(
+            
+            f"EAT-BEANS: {timeStamp} | Rewards: {beanRewards} | Beans: {beans} | ContracBalance: {contractBalance} | DailyPayout: {dailyPayout}\n"
+            f'-----\n'
         )
 
 
