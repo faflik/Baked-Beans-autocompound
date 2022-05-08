@@ -12,7 +12,7 @@ dotenv.load_dotenv(dir_path + '/.env')
 # connect to blockchain
 bsc = "https://bsc-dataseed.binance.org/"
 web3 = Web3(Web3.HTTPProvider(bsc))
-# check if .env file exist and correct address
+
 try:
     address = web3.toChecksumAddress(os.environ['ADDRESS'])
     balance = web3.eth.getBalance(os.environ['ADDRESS'])
